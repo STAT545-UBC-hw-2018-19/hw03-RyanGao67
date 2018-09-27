@@ -2,7 +2,7 @@
 title: "STAT 545A Homework 3"
 author: "Tian Gao"
 date: "2018/9/27"
-output: html_document
+output: github_document
 ---
 # Bring rectangular data in 
 ```{r}
