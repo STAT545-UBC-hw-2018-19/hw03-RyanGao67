@@ -12,15 +12,122 @@ library(tidyverse)
 
 # Get the maximum and minimum of GDP per capita for all continents.
 ```{r}
+# get data of maximum and minimum of GDP per capita for all continents
+gapminder %>% 
+  # group by continent
+  group_by(continent) %>% 
+  # calculate summaries
+  summarize(
+    max_gdpPercap = max(gdpPercap),
+    min_gdpPercap = min(gdpPercap),
+  )
 ```
 # Look at the spread of GDP per capita within the continents.
+* First I'll show the table of min, max, mean, sd of GDP percap
 ```{r}
+gapminder %>%
+  group_by(continent) %>%
+  summarize(
+    min_GDPPercap = min(gdpPercap),
+    max_GDPPercap = max(gdpPercap),
+    mean_GDPPercap = mean(gdpPercap),
+    sd_GDPPercap = sd(gdpPercap)
+  )
+```
+* In order to show the spread of GDP per capita within the continents, a plot should be clear and easy to understand. I put the distribution of all continents in one plot, thus the difference is obvious.
+```{r}
+gapminder %>% 
+  # gdpPercap as x axis
+  ggplot(aes(x=gdpPercap, color=continent)) +
+  # scale the x axis as the variance between continents is huge
+  scale_x_log10()+
+  # show the distribution of data
+  geom_density()
+```
+
+* Then I'll show the numbers in above table using box plot
+```{r}
+gapminder %>%
+  ggplot(aes(x=continent, y=gdpPercap)) + 
+  geom_boxplot()
 ```
 # Compute a trimmed mean of life expectancy for different years. Or a weighted mean, weighting by population. Just try something other than the plain vanilla mean.
+* For this part I will calculate the weighted mean, weighting by population
 ```{r}
+gapminder %>%
+  group_by(year) %>%
+  summarize(
+    vanilla_mean_lifeExp = mean(lifeExp),
+    weighted_mean_lifeExp = weighted.mean(lifeExp,pop)
+  )
+```
+* It is not obvious enough shown in the above table. Thus I try to put this into a plot. 
+```{r}
+
+gapminder %>%
+  group_by(year) %>%
+  mutate(avgLifeExp = mean(lifeExp)) %>%
+  ggplot(aes(x = continent, y = lifeExp)) + 
+  geom_jitter(alpha = 0.5, aes(color = lifeExp>avgLifeExp))+ 
+  facet_wrap( ~year)
 ```
 # How is life expectancy changing over time on different continents?
+* First I'll document the life expectancy in a table for each continent
+* Asia
 ```{r}
+gapminder %>%
+  filter(continent == 'Asia') %>%
+  group_by(year) %>%
+  summarize(Avg=mean(lifeExp))
+```
+
+* Africa
+```{r}
+gapminder %>%
+  filter(continent == 'Africa') %>%
+  group_by(year) %>%
+  summarize(Avg=mean(lifeExp))
+```
+
+* Americas
+```{r}
+gapminder %>%
+  filter(continent == 'Americas') %>%
+  group_by(year) %>%
+  summarize(Avg=mean(lifeExp))
+```
+
+* Europe
+```{r}
+gapminder %>%
+  filter(continent == 'Europe') %>%
+  group_by(year) %>%
+  summarize(Avg=mean(lifeExp))
+```
+
+* Oceania
+```{r}
+gapminder %>%
+  filter(continent == 'Oceania') %>%
+  group_by(year) %>%
+  summarize(Avg=mean(lifeExp))
+```
+
+* As table is not obvious enough to show the data, I'll then draw a plot to reflect this. 
+```{r}
+gapminder %>%
+  group_by(continent, year) %>%
+  summarize(
+    mean_lifeExp = mean(lifeExp)
+  )%>%
+  # year as x axis and mean_lifeExp as y axis
+  ggplot(aes(year, mean_lifeExp)) +
+  
+  # facetting by continent
+  facet_wrap(~continent, scales = "free_y")+
+  # make a line plot with points
+  geom_line() +
+  geom_point()
 ```
 # Report the absolute and/or relative abundance of countries with low life expectancy over time by continent: Compute some measure of worldwide life expectancy ¨C you decide ¨C a mean or median or some other quantile or perhaps your current age. Then determine how many countries on each continent have a life expectancy less than this benchmark, for each year.
 ```{r}
