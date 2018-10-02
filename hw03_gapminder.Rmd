@@ -239,6 +239,5 @@ kuwait %>%
   geom_line()
 ```
 
-``{r}
-One interesting thing about Kuwait is that there is a period when the gdpPercap is decreasing and both the population and lifeExp are increasing. This phenomenon is abnormal. 
-```
+
+* One interesting thing about Kuwait is that there is a period when the gdpPercap is decreasing and both the population and lifeExp are increasing. This phenomenon is abnormal. 

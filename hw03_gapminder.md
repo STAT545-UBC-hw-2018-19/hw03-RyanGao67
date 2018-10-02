@@ -567,6 +567,6 @@ kuwait %>%
 
 ![](hw03_gapminder_files/figure-gfm/unnamed-chunk-18-3.png)<!-- -->
 
-\`\`{r} One interesting thing about Kuwait is that there is a period
-when the gdpPercap is decreasing and both the population and lifeExp are
-increasing. This phenomenon is abnormal. \`\`\`
+  - One interesting thing about Kuwait is that there is a period when
+    the gdpPercap is decreasing and both the population and lifeExp are
+    increasing. This phenomenon is abnormal.
