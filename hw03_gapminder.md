@@ -488,8 +488,8 @@ continent
 
 # Find countries with interesting stories. Open-ended and, therefore, hard. Promising but unsuccessful attempts are encouraged. This will generate interesting questions to follow up on in class.
 
-  - For this part I will try to find the relation between GDPPercap and
-    lifeExp in .
+  - For this part I will try to find the relation between gdpPercap and
+    lifeExp .
 
 <!-- end list -->
 
@@ -511,9 +511,62 @@ gapminder%>%
 ![](hw03_gapminder_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
 
   - From the plot above we can see that for most of the countries,
-    lifeExp increases as the gspPercap increase. However, some countries
+    lifeExp increases as the gdpPercap increase. However, some countries
     has a period when the lifeExp decrease as the gdpPercap increase.
 
   - I’ll then try to find the reason. From the graphs above, we can see
     that Kuwait is the most typical one. So I will take Kuwait for
     example.
+
+<!-- end list -->
+
+``` r
+kuwait <- gapminder %>%
+  filter(country == "Kuwait")
+
+kuwait
+```
+
+    ## # A tibble: 12 x 6
+    ##    country continent  year lifeExp     pop gdpPercap
+    ##    <fct>   <fct>     <int>   <dbl>   <int>     <dbl>
+    ##  1 Kuwait  Asia       1952    55.6  160000   108382.
+    ##  2 Kuwait  Asia       1957    58.0  212846   113523.
+    ##  3 Kuwait  Asia       1962    60.5  358266    95458.
+    ##  4 Kuwait  Asia       1967    64.6  575003    80895.
+    ##  5 Kuwait  Asia       1972    67.7  841934   109348.
+    ##  6 Kuwait  Asia       1977    69.3 1140357    59265.
+    ##  7 Kuwait  Asia       1982    71.3 1497494    31354.
+    ##  8 Kuwait  Asia       1987    74.2 1891487    28118.
+    ##  9 Kuwait  Asia       1992    75.2 1418095    34933.
+    ## 10 Kuwait  Asia       1997    76.2 1765345    40301.
+    ## 11 Kuwait  Asia       2002    76.9 2111561    35110.
+    ## 12 Kuwait  Asia       2007    77.6 2505559    47307.
+
+``` r
+kuwait %>%
+  ggplot(aes(year, pop))+
+  geom_line()
+```
+
+![](hw03_gapminder_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
+
+``` r
+kuwait %>%
+  ggplot(aes(year, lifeExp))+
+  geom_line()
+```
+
+![](hw03_gapminder_files/figure-gfm/unnamed-chunk-18-2.png)<!-- -->
+
+``` r
+kuwait %>%
+  ggplot(aes(year, gdpPercap))+
+  geom_line()
+```
+
+![](hw03_gapminder_files/figure-gfm/unnamed-chunk-18-3.png)<!-- -->
+
+\`\`{r} One interesting thing about Kuwait is that there is a period
+when the gdpPercap is decreasing and both the population and lifeExp are
+increasing. This phenomenon is abnormal. \`\`\`
