@@ -58,17 +58,17 @@ gapminder %>%
     max_GDPPercap = max(gdpPercap),
     mean_GDPPercap = mean(gdpPercap),
     sd_GDPPercap = sd(gdpPercap)
-  )
+  )%>%
+  knitr::kable()
 ```
 
-    ## # A tibble: 5 x 5
-    ##   continent min_GDPPercap max_GDPPercap mean_GDPPercap sd_GDPPercap
-    ##   <fct>             <dbl>         <dbl>          <dbl>        <dbl>
-    ## 1 Africa             241.        21951.          2194.        2828.
-    ## 2 Americas          1202.        42952.          7136.        6397.
-    ## 3 Asia               331        113523.          7902.       14045.
-    ## 4 Europe             974.        49357.         14469.        9355.
-    ## 5 Oceania          10040.        34435.         18622.        6359.
+| continent | min\_GDPPercap | max\_GDPPercap | mean\_GDPPercap | sd\_GDPPercap |
+| :-------- | -------------: | -------------: | --------------: | ------------: |
+| Africa    |       241.1659 |       21951.21 |        2193.755 |      2827.930 |
+| Americas  |      1201.6372 |       42951.65 |        7136.110 |      6396.764 |
+| Asia      |       331.0000 |      113523.13 |        7902.150 |     14045.373 |
+| Europe    |       973.5332 |       49357.19 |       14469.476 |      9355.213 |
+| Oceania   |     10039.5956 |       34435.37 |       18621.609 |      6358.983 |
 
   - In order to show the spread of GDP per capita within the continents,
     a plot should be clear and easy to understand. I put the
@@ -111,29 +111,25 @@ gapminder %>%
   summarize(
     vanilla_mean_lifeExp = mean(lifeExp),
     weighted_mean_lifeExp = weighted.mean(lifeExp,pop)
-  )
+  )%>%
+  knitr::kable()
 ```
 
-    ## # A tibble: 12 x 3
-    ##     year vanilla_mean_lifeExp weighted_mean_lifeExp
-    ##    <int>                <dbl>                 <dbl>
-    ##  1  1952                 49.1                  48.9
-    ##  2  1957                 51.5                  52.1
-    ##  3  1962                 53.6                  52.3
-    ##  4  1967                 55.7                  57.0
-    ##  5  1972                 57.6                  59.5
-    ##  6  1977                 59.6                  61.2
-    ##  7  1982                 61.5                  62.9
-    ##  8  1987                 63.2                  64.4
-    ##  9  1992                 64.2                  65.6
-    ## 10  1997                 65.0                  66.8
-    ## 11  2002                 65.7                  67.8
-    ## 12  2007                 67.0                  68.9
-
-  - It is not obvious enough shown in the above table. Thus I try to put
-    this into a plot.
-
-<!-- end list -->
+|     year | vanilla\_mean\_lifeExp |                                    weighted\_mean\_lifeExp |
+| -------: | ---------------------: | ---------------------------------------------------------: |
+|     1952 |               49.05762 |                                                   48.94424 |
+|     1957 |               51.50740 |                                                   52.12189 |
+|     1962 |               53.60925 |                                                   52.32438 |
+|     1967 |               55.67829 |                                                   56.98431 |
+|     1972 |               57.64739 |                                                   59.51478 |
+|     1977 |               59.57016 |                                                   61.23726 |
+|     1982 |               61.53320 |                                                   62.88176 |
+|     1987 |               63.21261 |                                                   64.41635 |
+|     1992 |               64.16034 |                                                   65.64590 |
+|     1997 |               65.01468 |                                                   66.84934 |
+|     2002 |               65.69492 |                                                   67.83904 |
+|     2007 |               67.00742 |                                                   68.91909 |
+| \* It is | not obvious enough sho | wn in the above table. Thus I try to put this into a plot. |
 
 ``` r
 gapminder %>%

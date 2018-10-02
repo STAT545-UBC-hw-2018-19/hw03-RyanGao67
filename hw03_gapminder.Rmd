@@ -32,8 +32,11 @@ gapminder %>%
     max_GDPPercap = max(gdpPercap),
     mean_GDPPercap = mean(gdpPercap),
     sd_GDPPercap = sd(gdpPercap)
-  )
+  )%>%
+  knitr::kable()
 ```
+
+
 * In order to show the spread of GDP per capita within the continents, a plot should be clear and easy to understand. I put the distribution of all continents in one plot, thus the difference is obvious.
 ```{r}
 gapminder %>% 
@@ -59,7 +62,8 @@ gapminder %>%
   summarize(
     vanilla_mean_lifeExp = mean(lifeExp),
     weighted_mean_lifeExp = weighted.mean(lifeExp,pop)
-  )
+  )%>%
+  knitr::kable()
 ```
 * It is not obvious enough shown in the above table. Thus I try to put this into a plot. 
 ```{r}
