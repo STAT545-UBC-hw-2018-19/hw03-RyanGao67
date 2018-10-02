@@ -133,9 +133,72 @@ gapminder %>%
   geom_line() +
   geom_point()
 ```
+
+* From the plot above we can see that the life expectancy is increasing over the years.
+
 # Report the absolute and/or relative abundance of countries with low life expectancy over time by continent: Compute some measure of worldwide life expectancy ¨C you decide ¨C a mean or median or some other quantile or perhaps your current age. Then determine how many countries on each continent have a life expectancy less than this benchmark, for each year.
+* For this question I chose mean as the benchmark
+
 ```{r}
+mean(gapminder$lifeExp)
 ```
-# Find countries with interesting stories. Open-ended and, therefore, hard. Promising but unsuccessful attempts are encouraged. This will generate interesting questions to follow up on in class.
+* Before I make a plot, I'll first show in table how to determine whether a country have a life expectancy lower that benchmark. 
 ```{r}
+ gapminder %>% 
+  group_by(country, year) %>% 
+  # check if a country has low lifeExp
+  mutate(
+    low_lifeExp = lifeExp < mean(gapminder$lifeExp)
+  ) %>% 
+  select(country, year, lifeExp, low_lifeExp)%>%
+  head(100)%>%
+  knitr::kable()
+
+```
+
+* From here, we can plot based on the number of boolean value. More specificly we can count the number of appearance of TRUE. 
+
+```{r}
+ gapminder %>% 
+  group_by(country, year) %>% 
+  # check if a country has low lifeExp
+  mutate(
+    low_lifeExp = lifeExp < mean(gapminder$lifeExp)
+  ) %>% 
+  ggplot(aes(x=year, fill=low_lifeExp)) +
+  facet_grid(~continent)+
+  # make it a bar plot
+  geom_bar()
+
+ gapminder %>% 
+  group_by(continent, year) %>% 
+  mutate(
+    low_lifeExp = lifeExp < mean(gapminder$lifeExp)
+  ) %>%
+  summarise(low_ct = sum(low_lifeExp))%>%
+  ggplot(aes(x=year, y=low_ct)) +
+  # make it a bar plot
+  geom_line(aes(color = continent))+
+   geom_point(aes(color = continent))
+
+```
+
+* The plot above is the report of absolute of countries with low life expectancy over time by continent
+  
+# Find countries with interesting stories. Open-ended and, therefore, hard. Promising but unsuccessful attempts are encouraged. This will generate interesting questions to follow up on in class.
+
+* For this part I will try to find the relation between GDPPercap and lifeExp in .
+```{r}
+gapminder%>%
+  filter(continent == "Asia") %>%
+  # pop as x axis and lifeExp as y axis
+  ggplot(aes(x=gdpPercap, y=lifeExp)) +
+  # scale y axis by log10
+  scale_y_log10() +
+  # facetting by country
+  facet_wrap(~country, scales="free") +
+  # make a line plot
+  geom_line() +
+  # make a better x axis
+  scale_x_continuous(breaks=NULL)
 ```

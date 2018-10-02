@@ -297,12 +297,203 @@ gapminder %>%
   geom_point()
 ```
 
-![](hw03_gapminder_files/figure-gfm/unnamed-chunk-13-1.png)<!-- --> \#
-Report the absolute and/or relative abundance of countries with low life
-expectancy over time by continent: Compute some measure of worldwide
-life expectancy – you decide – a mean or median or some other quantile
-or perhaps your current age. Then determine how many countries on each
-continent have a life expectancy less than this benchmark, for each
-year.
+![](hw03_gapminder_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+
+  - From the plot above we can see that the life expectancy is
+    increasing over the
+years.
+
+# Report the absolute and/or relative abundance of countries with low life expectancy over time by continent: Compute some measure of worldwide life expectancy – you decide – a mean or median or some other quantile or perhaps your current age. Then determine how many countries on each continent have a life expectancy less than this benchmark, for each year.
+
+  - For this question I chose mean as the benchmark
+
+<!-- end list -->
+
+``` r
+mean(gapminder$lifeExp)
+```
+
+    ## [1] 59.47444
+
+  - Before I make a plot, I’ll first show in table how to determine
+    whether a country have a life expectancy lower that benchmark.
+
+<!-- end list -->
+
+``` r
+ gapminder %>% 
+  group_by(country, year) %>% 
+  # check if a country has low lifeExp
+  mutate(
+    low_lifeExp = lifeExp < mean(gapminder$lifeExp)
+  ) %>% 
+  select(country, year, lifeExp, low_lifeExp)%>%
+  head(100)%>%
+  knitr::kable()
+```
+
+| country     | year | lifeExp | low\_lifeExp |
+| :---------- | ---: | ------: | :----------- |
+| Afghanistan | 1952 |  28.801 | TRUE         |
+| Afghanistan | 1957 |  30.332 | TRUE         |
+| Afghanistan | 1962 |  31.997 | TRUE         |
+| Afghanistan | 1967 |  34.020 | TRUE         |
+| Afghanistan | 1972 |  36.088 | TRUE         |
+| Afghanistan | 1977 |  38.438 | TRUE         |
+| Afghanistan | 1982 |  39.854 | TRUE         |
+| Afghanistan | 1987 |  40.822 | TRUE         |
+| Afghanistan | 1992 |  41.674 | TRUE         |
+| Afghanistan | 1997 |  41.763 | TRUE         |
+| Afghanistan | 2002 |  42.129 | TRUE         |
+| Afghanistan | 2007 |  43.828 | TRUE         |
+| Albania     | 1952 |  55.230 | TRUE         |
+| Albania     | 1957 |  59.280 | TRUE         |
+| Albania     | 1962 |  64.820 | FALSE        |
+| Albania     | 1967 |  66.220 | FALSE        |
+| Albania     | 1972 |  67.690 | FALSE        |
+| Albania     | 1977 |  68.930 | FALSE        |
+| Albania     | 1982 |  70.420 | FALSE        |
+| Albania     | 1987 |  72.000 | FALSE        |
+| Albania     | 1992 |  71.581 | FALSE        |
+| Albania     | 1997 |  72.950 | FALSE        |
+| Albania     | 2002 |  75.651 | FALSE        |
+| Albania     | 2007 |  76.423 | FALSE        |
+| Algeria     | 1952 |  43.077 | TRUE         |
+| Algeria     | 1957 |  45.685 | TRUE         |
+| Algeria     | 1962 |  48.303 | TRUE         |
+| Algeria     | 1967 |  51.407 | TRUE         |
+| Algeria     | 1972 |  54.518 | TRUE         |
+| Algeria     | 1977 |  58.014 | TRUE         |
+| Algeria     | 1982 |  61.368 | FALSE        |
+| Algeria     | 1987 |  65.799 | FALSE        |
+| Algeria     | 1992 |  67.744 | FALSE        |
+| Algeria     | 1997 |  69.152 | FALSE        |
+| Algeria     | 2002 |  70.994 | FALSE        |
+| Algeria     | 2007 |  72.301 | FALSE        |
+| Angola      | 1952 |  30.015 | TRUE         |
+| Angola      | 1957 |  31.999 | TRUE         |
+| Angola      | 1962 |  34.000 | TRUE         |
+| Angola      | 1967 |  35.985 | TRUE         |
+| Angola      | 1972 |  37.928 | TRUE         |
+| Angola      | 1977 |  39.483 | TRUE         |
+| Angola      | 1982 |  39.942 | TRUE         |
+| Angola      | 1987 |  39.906 | TRUE         |
+| Angola      | 1992 |  40.647 | TRUE         |
+| Angola      | 1997 |  40.963 | TRUE         |
+| Angola      | 2002 |  41.003 | TRUE         |
+| Angola      | 2007 |  42.731 | TRUE         |
+| Argentina   | 1952 |  62.485 | FALSE        |
+| Argentina   | 1957 |  64.399 | FALSE        |
+| Argentina   | 1962 |  65.142 | FALSE        |
+| Argentina   | 1967 |  65.634 | FALSE        |
+| Argentina   | 1972 |  67.065 | FALSE        |
+| Argentina   | 1977 |  68.481 | FALSE        |
+| Argentina   | 1982 |  69.942 | FALSE        |
+| Argentina   | 1987 |  70.774 | FALSE        |
+| Argentina   | 1992 |  71.868 | FALSE        |
+| Argentina   | 1997 |  73.275 | FALSE        |
+| Argentina   | 2002 |  74.340 | FALSE        |
+| Argentina   | 2007 |  75.320 | FALSE        |
+| Australia   | 1952 |  69.120 | FALSE        |
+| Australia   | 1957 |  70.330 | FALSE        |
+| Australia   | 1962 |  70.930 | FALSE        |
+| Australia   | 1967 |  71.100 | FALSE        |
+| Australia   | 1972 |  71.930 | FALSE        |
+| Australia   | 1977 |  73.490 | FALSE        |
+| Australia   | 1982 |  74.740 | FALSE        |
+| Australia   | 1987 |  76.320 | FALSE        |
+| Australia   | 1992 |  77.560 | FALSE        |
+| Australia   | 1997 |  78.830 | FALSE        |
+| Australia   | 2002 |  80.370 | FALSE        |
+| Australia   | 2007 |  81.235 | FALSE        |
+| Austria     | 1952 |  66.800 | FALSE        |
+| Austria     | 1957 |  67.480 | FALSE        |
+| Austria     | 1962 |  69.540 | FALSE        |
+| Austria     | 1967 |  70.140 | FALSE        |
+| Austria     | 1972 |  70.630 | FALSE        |
+| Austria     | 1977 |  72.170 | FALSE        |
+| Austria     | 1982 |  73.180 | FALSE        |
+| Austria     | 1987 |  74.940 | FALSE        |
+| Austria     | 1992 |  76.040 | FALSE        |
+| Austria     | 1997 |  77.510 | FALSE        |
+| Austria     | 2002 |  78.980 | FALSE        |
+| Austria     | 2007 |  79.829 | FALSE        |
+| Bahrain     | 1952 |  50.939 | TRUE         |
+| Bahrain     | 1957 |  53.832 | TRUE         |
+| Bahrain     | 1962 |  56.923 | TRUE         |
+| Bahrain     | 1967 |  59.923 | FALSE        |
+| Bahrain     | 1972 |  63.300 | FALSE        |
+| Bahrain     | 1977 |  65.593 | FALSE        |
+| Bahrain     | 1982 |  69.052 | FALSE        |
+| Bahrain     | 1987 |  70.750 | FALSE        |
+| Bahrain     | 1992 |  72.601 | FALSE        |
+| Bahrain     | 1997 |  73.925 | FALSE        |
+| Bahrain     | 2002 |  74.795 | FALSE        |
+| Bahrain     | 2007 |  75.635 | FALSE        |
+| Bangladesh  | 1952 |  37.484 | TRUE         |
+| Bangladesh  | 1957 |  39.348 | TRUE         |
+| Bangladesh  | 1962 |  41.216 | TRUE         |
+| Bangladesh  | 1967 |  43.453 | TRUE         |
+
+  - From here, we can plot based on the number of boolean value. More
+    specificly we can count the number of appearance of TRUE.
+
+<!-- end list -->
+
+``` r
+ gapminder %>% 
+  group_by(country, year) %>% 
+  # check if a country has low lifeExp
+  mutate(
+    low_lifeExp = lifeExp < mean(gapminder$lifeExp)
+  ) %>% 
+  ggplot(aes(x=year, fill=low_lifeExp)) +
+  facet_grid(~continent)+
+  # make it a bar plot
+  geom_bar()
+```
+
+![](hw03_gapminder_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+
+``` r
+ gapminder %>% 
+  group_by(continent, year) %>% 
+  mutate(
+    low_lifeExp = lifeExp < mean(gapminder$lifeExp)
+  ) %>%
+  summarise(low_ct = sum(low_lifeExp))%>%
+  ggplot(aes(x=year, y=low_ct)) +
+  # make it a bar plot
+  geom_line(aes(color = continent))+
+   geom_point(aes(color = continent))
+```
+
+![](hw03_gapminder_files/figure-gfm/unnamed-chunk-16-2.png)<!-- -->
+
+  - The plot above is the report of absolute of countries with low life
+    expectancy over time by
+continent
 
 # Find countries with interesting stories. Open-ended and, therefore, hard. Promising but unsuccessful attempts are encouraged. This will generate interesting questions to follow up on in class.
+
+  - For this part I will try to find the relation between GDPPercap and
+    lifeExp in .
+
+<!-- end list -->
+
+``` r
+gapminder%>%
+  filter(continent == "Asia") %>%
+  # pop as x axis and lifeExp as y axis
+  ggplot(aes(x=gdpPercap, y=lifeExp)) +
+  # scale y axis by log10
+  scale_y_log10() +
+  # facetting by country
+  facet_wrap(~country, scales="free") +
+  # make a line plot
+  geom_line() +
+  # make a better x axis
+  scale_x_continuous(breaks=NULL)
+```
+
+![](hw03_gapminder_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
