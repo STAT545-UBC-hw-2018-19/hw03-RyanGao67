@@ -13,16 +13,33 @@ library(tidyverse)
 # Get the maximum and minimum of GDP per capita for all continents.
 ```{r}
 # get data of maximum and minimum of GDP per capita for all continents
-gapminder %>% 
+GDP_per_cap<-gapminder %>% 
   # group by continent
   group_by(continent) %>% 
   # calculate summaries
   summarize(
     max_gdpPercap = max(gdpPercap),
     min_gdpPercap = min(gdpPercap),
-  )%>%
+  )
+GDP_per_cap %>%
   knitr::kable()
 ```
+* Now I'll put the data into a plot 
+```{r}
+GDP_per_cap %>% 
+  # Gather the gdpPercap data
+  gather( key = minmax, value = gdpPercap, 2:3 )  %>%
+  ggplot( aes( x = continent, y = gdpPercap, fill = continent )) +
+  # the height of bars reporesents the data
+  geom_col() +
+  # scale the y-axis
+  scale_y_log10() +
+  facet_wrap( .~minmax )  +
+  ggtitle( "GDP per capital for all continents" ) +
+  xlab( "Continent") +
+  ylab( "GDP per capital" )
+```
+
 
 # Look at the spread of GDP per capita within the continents.
 * First I'll show the table of min, max, mean, sd of GDP percap

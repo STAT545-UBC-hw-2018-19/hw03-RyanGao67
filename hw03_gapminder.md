@@ -25,24 +25,43 @@ library(tidyverse)
 
 ``` r
 # get data of maximum and minimum of GDP per capita for all continents
-gapminder %>% 
+GDP_per_cap<-gapminder %>% 
   # group by continent
   group_by(continent) %>% 
   # calculate summaries
   summarize(
     max_gdpPercap = max(gdpPercap),
     min_gdpPercap = min(gdpPercap),
-  )%>%
+  )
+GDP_per_cap %>%
   knitr::kable()
 ```
 
-| continent | max\_gdpPercap | min\_gdpPercap |
-| :-------- | -------------: | -------------: |
-| Africa    |       21951.21 |       241.1659 |
-| Americas  |       42951.65 |      1201.6372 |
-| Asia      |      113523.13 |       331.0000 |
-| Europe    |       49357.19 |       973.5332 |
-| Oceania   |       34435.37 |     10039.5956 |
+| continent     |   max\_gdpPercap | min\_gdpPercap |
+| :------------ | ---------------: | -------------: |
+| Africa        |         21951.21 |       241.1659 |
+| Americas      |         42951.65 |      1201.6372 |
+| Asia          |        113523.13 |       331.0000 |
+| Europe        |         49357.19 |       973.5332 |
+| Oceania       |         34435.37 |     10039.5956 |
+| \* Now I’ll p | ut the data into |         a plot |
+
+``` r
+GDP_per_cap %>% 
+  # Gather the gdpPercap data
+  gather( key = minmax, value = gdpPercap, 2:3 )  %>%
+  ggplot( aes( x = continent, y = gdpPercap, fill = continent )) +
+  # the height of bars reporesents the data
+  geom_col() +
+  # scale the y-axis
+  scale_y_log10() +
+  facet_wrap( .~minmax )  +
+  ggtitle( "GDP per capital for all continents" ) +
+  xlab( "Continent") +
+  ylab( "GDP per capital" )
+```
+
+![](hw03_gapminder_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 # Look at the spread of GDP per capita within the continents.
 
@@ -87,7 +106,7 @@ gapminder %>%
   geom_density()
 ```
 
-![](hw03_gapminder_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](hw03_gapminder_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
   - Then I’ll show the numbers in above table using box plot
 
@@ -99,7 +118,7 @@ gapminder %>%
   geom_boxplot()
 ```
 
-![](hw03_gapminder_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](hw03_gapminder_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 # Compute a trimmed mean of life expectancy for different years. Or a weighted mean, weighting by population. Just try something other than the plain vanilla mean.
 
@@ -147,7 +166,7 @@ gapminder %>%
   facet_wrap( ~year)
 ```
 
-![](hw03_gapminder_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+![](hw03_gapminder_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 # How is life expectancy changing over time on different continents?
 
@@ -309,7 +328,7 @@ gapminder %>%
   geom_point()
 ```
 
-![](hw03_gapminder_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+![](hw03_gapminder_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
 
   - From the plot above we can see that the life expectancy is
     increasing over the
@@ -465,7 +484,7 @@ mean(gapminder$lifeExp)
   geom_bar()
 ```
 
-![](hw03_gapminder_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+![](hw03_gapminder_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
 
 ``` r
  gapminder %>% 
@@ -480,7 +499,7 @@ mean(gapminder$lifeExp)
    geom_point(aes(color = continent))
 ```
 
-![](hw03_gapminder_files/figure-gfm/unnamed-chunk-16-2.png)<!-- -->
+![](hw03_gapminder_files/figure-gfm/unnamed-chunk-17-2.png)<!-- -->
 
   - The plot above is the report of absolute of countries with low life
     expectancy over time by
@@ -508,7 +527,7 @@ gapminder%>%
   scale_x_continuous(breaks=NULL)
 ```
 
-![](hw03_gapminder_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+![](hw03_gapminder_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
 
   - From the plot above we can see that for most of the countries,
     lifeExp increases as the gdpPercap increase. However, some countries
@@ -549,7 +568,7 @@ kuwait %>%
   geom_line()
 ```
 
-![](hw03_gapminder_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
+![](hw03_gapminder_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
 
 ``` r
 kuwait %>%
@@ -557,7 +576,7 @@ kuwait %>%
   geom_line()
 ```
 
-![](hw03_gapminder_files/figure-gfm/unnamed-chunk-18-2.png)<!-- -->
+![](hw03_gapminder_files/figure-gfm/unnamed-chunk-19-2.png)<!-- -->
 
 ``` r
 kuwait %>%
@@ -565,7 +584,7 @@ kuwait %>%
   geom_line()
 ```
 
-![](hw03_gapminder_files/figure-gfm/unnamed-chunk-18-3.png)<!-- -->
+![](hw03_gapminder_files/figure-gfm/unnamed-chunk-19-3.png)<!-- -->
 
   - One interesting thing about Kuwait is that there is a period when
     the gdpPercap is decreasing and both the population and lifeExp are
