@@ -10,14 +10,14 @@ library(gapminder)
 library(tidyverse)
 ```
 
-    ## -- Attaching packages -------------------------------------------------------------------------------------------------------------------------- tidyverse 1.2.1 --
+    ## -- Attaching packages ------------------------------------- tidyverse 1.2.1 --
 
     ## √ ggplot2 3.0.0     √ purrr   0.2.5
     ## √ tibble  1.4.2     √ dplyr   0.7.6
     ## √ tidyr   0.8.1     √ stringr 1.3.1
     ## √ readr   1.1.1     √ forcats 0.3.0
 
-    ## -- Conflicts ----------------------------------------------------------------------------------------------------------------------------- tidyverse_conflicts() --
+    ## -- Conflicts ---------------------------------------- tidyverse_conflicts() --
     ## x dplyr::filter() masks stats::filter()
     ## x dplyr::lag()    masks stats::lag()
 
@@ -141,7 +141,7 @@ gapminder %>%
 ``` r
 gapminder %>%
   group_by(year) %>%
-  mutate(avgLifeExp = mean(lifeExp)) %>%
+  mutate(avgLifeExp = weighted.mean(lifeExp)) %>%
   ggplot(aes(x = continent, y = lifeExp)) + 
   geom_jitter(alpha = 0.5, aes(color = lifeExp>avgLifeExp))+ 
   facet_wrap( ~year)

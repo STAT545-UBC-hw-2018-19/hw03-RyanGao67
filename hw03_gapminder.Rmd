@@ -74,7 +74,7 @@ gapminder %>%
 
 gapminder %>%
   group_by(year) %>%
-  mutate(avgLifeExp = mean(lifeExp)) %>%
+  mutate(avgLifeExp = weighted.mean(lifeExp)) %>%
   ggplot(aes(x = continent, y = lifeExp)) + 
   geom_jitter(alpha = 0.5, aes(color = lifeExp>avgLifeExp))+ 
   facet_wrap( ~year)
