@@ -36,15 +36,19 @@ gapminder %>%
   knitr::kable()
 ```
 
-| continent     |  max\_gdpPercap |                      min\_gdpPercap |
-| :------------ | --------------: | ----------------------------------: |
-| Africa        |        21951.21 |                            241.1659 |
-| Americas      |        42951.65 |                           1201.6372 |
-| Asia          |       113523.13 |                            331.0000 |
-| Europe        |        49357.19 |                            973.5332 |
-| Oceania       |        34435.37 |                          10039.5956 |
-| \# Look at th | e spread of GDP |   per capita within the continents. |
-| \* First I’ll |  show the table | of min, max, mean, sd of GDP percap |
+| continent | max\_gdpPercap | min\_gdpPercap |
+| :-------- | -------------: | -------------: |
+| Africa    |       21951.21 |       241.1659 |
+| Americas  |       42951.65 |      1201.6372 |
+| Asia      |      113523.13 |       331.0000 |
+| Europe    |       49357.19 |       973.5332 |
+| Oceania   |       34435.37 |     10039.5956 |
+
+# Look at the spread of GDP per capita within the continents.
+
+  - First I’ll show the table of min, max, mean, sd of GDP percap
+
+<!-- end list -->
 
 ``` r
 gapminder %>%
@@ -95,11 +99,14 @@ gapminder %>%
   geom_boxplot()
 ```
 
-![](hw03_gapminder_files/figure-gfm/unnamed-chunk-5-1.png)<!-- --> \#
-Compute a trimmed mean of life expectancy for different years. Or a
-weighted mean, weighting by population. Just try something other than
-the plain vanilla mean. \* For this part I will calculate the weighted
-mean, weighting by population
+![](hw03_gapminder_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+
+# Compute a trimmed mean of life expectancy for different years. Or a weighted mean, weighting by population. Just try something other than the plain vanilla mean.
+
+  - For this part I will calculate the weighted mean, weighting by
+    population
+
+<!-- end list -->
 
 ``` r
 gapminder %>%
@@ -111,21 +118,25 @@ gapminder %>%
   knitr::kable()
 ```
 
-|     year | vanilla\_mean\_lifeExp |                                    weighted\_mean\_lifeExp |
-| -------: | ---------------------: | ---------------------------------------------------------: |
-|     1952 |               49.05762 |                                                   48.94424 |
-|     1957 |               51.50740 |                                                   52.12189 |
-|     1962 |               53.60925 |                                                   52.32438 |
-|     1967 |               55.67829 |                                                   56.98431 |
-|     1972 |               57.64739 |                                                   59.51478 |
-|     1977 |               59.57016 |                                                   61.23726 |
-|     1982 |               61.53320 |                                                   62.88176 |
-|     1987 |               63.21261 |                                                   64.41635 |
-|     1992 |               64.16034 |                                                   65.64590 |
-|     1997 |               65.01468 |                                                   66.84934 |
-|     2002 |               65.69492 |                                                   67.83904 |
-|     2007 |               67.00742 |                                                   68.91909 |
-| \* It is | not obvious enough sho | wn in the above table. Thus I try to put this into a plot. |
+| year | vanilla\_mean\_lifeExp | weighted\_mean\_lifeExp |
+| ---: | ---------------------: | ----------------------: |
+| 1952 |               49.05762 |                48.94424 |
+| 1957 |               51.50740 |                52.12189 |
+| 1962 |               53.60925 |                52.32438 |
+| 1967 |               55.67829 |                56.98431 |
+| 1972 |               57.64739 |                59.51478 |
+| 1977 |               59.57016 |                61.23726 |
+| 1982 |               61.53320 |                62.88176 |
+| 1987 |               63.21261 |                64.41635 |
+| 1992 |               64.16034 |                65.64590 |
+| 1997 |               65.01468 |                66.84934 |
+| 2002 |               65.69492 |                67.83904 |
+| 2007 |               67.00742 |                68.91909 |
+
+  - It is not obvious enough shown in the above table. Thus I try to put
+    this into a plot.
+
+<!-- end list -->
 
 ``` r
 gapminder %>%
@@ -136,10 +147,15 @@ gapminder %>%
   facet_wrap( ~year)
 ```
 
-![](hw03_gapminder_files/figure-gfm/unnamed-chunk-7-1.png)<!-- --> \#
-How is life expectancy changing over time on different continents? \*
-First I’ll document the life expectancy in a table for each continent \*
-Asia
+![](hw03_gapminder_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+
+# How is life expectancy changing over time on different continents?
+
+  - First I’ll document the life expectancy in a table for each
+    continent
+  - Asia
+
+<!-- end list -->
 
 ``` r
 gapminder %>%
