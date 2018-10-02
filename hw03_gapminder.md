@@ -10,14 +10,14 @@ library(gapminder)
 library(tidyverse)
 ```
 
-    ## -- Attaching packages ------------------------------------- tidyverse 1.2.1 --
+    ## -- Attaching packages -------------------------------------------------------------------------------------------------------------------------- tidyverse 1.2.1 --
 
     ## √ ggplot2 3.0.0     √ purrr   0.2.5
     ## √ tibble  1.4.2     √ dplyr   0.7.6
     ## √ tidyr   0.8.1     √ stringr 1.3.1
     ## √ readr   1.1.1     √ forcats 0.3.0
 
-    ## -- Conflicts ---------------------------------------- tidyverse_conflicts() --
+    ## -- Conflicts ----------------------------------------------------------------------------------------------------------------------------- tidyverse_conflicts() --
     ## x dplyr::filter() masks stats::filter()
     ## x dplyr::lag()    masks stats::lag()
 
@@ -497,3 +497,11 @@ gapminder%>%
 ```
 
 ![](hw03_gapminder_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+
+  - From the plot above we can see that for most of the countries,
+    lifeExp increases as the gspPercap increase. However, some countries
+    has a period when the lifeExp decrease as the gdpPercap increase.
+
+  - I’ll then try to find the reason. From the graphs above, we can see
+    that Kuwait is the most typical one. So I will take Kuwait for
+    example.

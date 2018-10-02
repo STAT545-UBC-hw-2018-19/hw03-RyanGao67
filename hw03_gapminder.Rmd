@@ -202,3 +202,8 @@ gapminder%>%
   # make a better x axis
   scale_x_continuous(breaks=NULL)
 ```
+
+* From the plot above we can see that for most of the countries, lifeExp increases as the gspPercap increase. However, some countries has a period when the lifeExp decrease as the gdpPercap increase. 
+
+* I'll then try to find the reason. From the graphs above, we can see that Kuwait is the most typical one. So I will take Kuwait for example.
+
