@@ -20,7 +20,8 @@ gapminder %>%
   summarize(
     max_gdpPercap = max(gdpPercap),
     min_gdpPercap = min(gdpPercap),
-  )
+  )%>%
+  knitr::kable()
 ```
 # Look at the spread of GDP per capita within the continents.
 * First I'll show the table of min, max, mean, sd of GDP percap
@@ -82,7 +83,8 @@ gapminder %>%
 gapminder %>%
   filter(continent == 'Asia') %>%
   group_by(year) %>%
-  summarize(Avg=mean(lifeExp))
+  summarize(Avg=mean(lifeExp))%>%
+  knitr::kable()
 ```
 
 * Africa
@@ -90,7 +92,8 @@ gapminder %>%
 gapminder %>%
   filter(continent == 'Africa') %>%
   group_by(year) %>%
-  summarize(Avg=mean(lifeExp))
+  summarize(Avg=mean(lifeExp))%>%
+  knitr::kable()
 ```
 
 * Americas
@@ -98,7 +101,8 @@ gapminder %>%
 gapminder %>%
   filter(continent == 'Americas') %>%
   group_by(year) %>%
-  summarize(Avg=mean(lifeExp))
+  summarize(Avg=mean(lifeExp))%>%
+  knitr::kable()
 ```
 
 * Europe
@@ -106,7 +110,8 @@ gapminder %>%
 gapminder %>%
   filter(continent == 'Europe') %>%
   group_by(year) %>%
-  summarize(Avg=mean(lifeExp))
+  summarize(Avg=mean(lifeExp))%>%
+  knitr::kable()
 ```
 
 * Oceania
@@ -114,7 +119,8 @@ gapminder %>%
 gapminder %>%
   filter(continent == 'Oceania') %>%
   group_by(year) %>%
-  summarize(Avg=mean(lifeExp))
+  summarize(Avg=mean(lifeExp))%>%
+  knitr::kable()
 ```
 
 * As table is not obvious enough to show the data, I'll then draw a plot to reflect this. 

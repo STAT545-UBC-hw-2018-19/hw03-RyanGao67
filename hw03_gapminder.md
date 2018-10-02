@@ -32,23 +32,19 @@ gapminder %>%
   summarize(
     max_gdpPercap = max(gdpPercap),
     min_gdpPercap = min(gdpPercap),
-  )
+  )%>%
+  knitr::kable()
 ```
 
-    ## # A tibble: 5 x 3
-    ##   continent max_gdpPercap min_gdpPercap
-    ##   <fct>             <dbl>         <dbl>
-    ## 1 Africa           21951.          241.
-    ## 2 Americas         42952.         1202.
-    ## 3 Asia            113523.          331 
-    ## 4 Europe           49357.          974.
-    ## 5 Oceania          34435.        10040.
-
-# Look at the spread of GDP per capita within the continents.
-
-  - First I’ll show the table of min, max, mean, sd of GDP percap
-
-<!-- end list -->
+| continent     |  max\_gdpPercap |                      min\_gdpPercap |
+| :------------ | --------------: | ----------------------------------: |
+| Africa        |        21951.21 |                            241.1659 |
+| Americas      |        42951.65 |                           1201.6372 |
+| Asia          |       113523.13 |                            331.0000 |
+| Europe        |        49357.19 |                            973.5332 |
+| Oceania       |        34435.37 |                          10039.5956 |
+| \# Look at th | e spread of GDP |   per capita within the continents. |
+| \* First I’ll |  show the table | of min, max, mean, sd of GDP percap |
 
 ``` r
 gapminder %>%
@@ -149,24 +145,24 @@ Asia
 gapminder %>%
   filter(continent == 'Asia') %>%
   group_by(year) %>%
-  summarize(Avg=mean(lifeExp))
+  summarize(Avg=mean(lifeExp))%>%
+  knitr::kable()
 ```
 
-    ## # A tibble: 12 x 2
-    ##     year   Avg
-    ##    <int> <dbl>
-    ##  1  1952  46.3
-    ##  2  1957  49.3
-    ##  3  1962  51.6
-    ##  4  1967  54.7
-    ##  5  1972  57.3
-    ##  6  1977  59.6
-    ##  7  1982  62.6
-    ##  8  1987  64.9
-    ##  9  1992  66.5
-    ## 10  1997  68.0
-    ## 11  2002  69.2
-    ## 12  2007  70.7
+| year |      Avg |
+| ---: | -------: |
+| 1952 | 46.31439 |
+| 1957 | 49.31854 |
+| 1962 | 51.56322 |
+| 1967 | 54.66364 |
+| 1972 | 57.31927 |
+| 1977 | 59.61056 |
+| 1982 | 62.61794 |
+| 1987 | 64.85118 |
+| 1992 | 66.53721 |
+| 1997 | 68.02052 |
+| 2002 | 69.23388 |
+| 2007 | 70.72848 |
 
   - Africa
 
@@ -176,24 +172,24 @@ gapminder %>%
 gapminder %>%
   filter(continent == 'Africa') %>%
   group_by(year) %>%
-  summarize(Avg=mean(lifeExp))
+  summarize(Avg=mean(lifeExp))%>%
+  knitr::kable()
 ```
 
-    ## # A tibble: 12 x 2
-    ##     year   Avg
-    ##    <int> <dbl>
-    ##  1  1952  39.1
-    ##  2  1957  41.3
-    ##  3  1962  43.3
-    ##  4  1967  45.3
-    ##  5  1972  47.5
-    ##  6  1977  49.6
-    ##  7  1982  51.6
-    ##  8  1987  53.3
-    ##  9  1992  53.6
-    ## 10  1997  53.6
-    ## 11  2002  53.3
-    ## 12  2007  54.8
+| year |      Avg |
+| ---: | -------: |
+| 1952 | 39.13550 |
+| 1957 | 41.26635 |
+| 1962 | 43.31944 |
+| 1967 | 45.33454 |
+| 1972 | 47.45094 |
+| 1977 | 49.58042 |
+| 1982 | 51.59287 |
+| 1987 | 53.34479 |
+| 1992 | 53.62958 |
+| 1997 | 53.59827 |
+| 2002 | 53.32523 |
+| 2007 | 54.80604 |
 
   - Americas
 
@@ -203,24 +199,24 @@ gapminder %>%
 gapminder %>%
   filter(continent == 'Americas') %>%
   group_by(year) %>%
-  summarize(Avg=mean(lifeExp))
+  summarize(Avg=mean(lifeExp))%>%
+  knitr::kable()
 ```
 
-    ## # A tibble: 12 x 2
-    ##     year   Avg
-    ##    <int> <dbl>
-    ##  1  1952  53.3
-    ##  2  1957  56.0
-    ##  3  1962  58.4
-    ##  4  1967  60.4
-    ##  5  1972  62.4
-    ##  6  1977  64.4
-    ##  7  1982  66.2
-    ##  8  1987  68.1
-    ##  9  1992  69.6
-    ## 10  1997  71.2
-    ## 11  2002  72.4
-    ## 12  2007  73.6
+| year |      Avg |
+| ---: | -------: |
+| 1952 | 53.27984 |
+| 1957 | 55.96028 |
+| 1962 | 58.39876 |
+| 1967 | 60.41092 |
+| 1972 | 62.39492 |
+| 1977 | 64.39156 |
+| 1982 | 66.22884 |
+| 1987 | 68.09072 |
+| 1992 | 69.56836 |
+| 1997 | 71.15048 |
+| 2002 | 72.42204 |
+| 2007 | 73.60812 |
 
   - Europe
 
@@ -230,24 +226,24 @@ gapminder %>%
 gapminder %>%
   filter(continent == 'Europe') %>%
   group_by(year) %>%
-  summarize(Avg=mean(lifeExp))
+  summarize(Avg=mean(lifeExp))%>%
+  knitr::kable()
 ```
 
-    ## # A tibble: 12 x 2
-    ##     year   Avg
-    ##    <int> <dbl>
-    ##  1  1952  64.4
-    ##  2  1957  66.7
-    ##  3  1962  68.5
-    ##  4  1967  69.7
-    ##  5  1972  70.8
-    ##  6  1977  71.9
-    ##  7  1982  72.8
-    ##  8  1987  73.6
-    ##  9  1992  74.4
-    ## 10  1997  75.5
-    ## 11  2002  76.7
-    ## 12  2007  77.6
+| year |      Avg |
+| ---: | -------: |
+| 1952 | 64.40850 |
+| 1957 | 66.70307 |
+| 1962 | 68.53923 |
+| 1967 | 69.73760 |
+| 1972 | 70.77503 |
+| 1977 | 71.93777 |
+| 1982 | 72.80640 |
+| 1987 | 73.64217 |
+| 1992 | 74.44010 |
+| 1997 | 75.50517 |
+| 2002 | 76.70060 |
+| 2007 | 77.64860 |
 
   - Oceania
 
@@ -257,24 +253,24 @@ gapminder %>%
 gapminder %>%
   filter(continent == 'Oceania') %>%
   group_by(year) %>%
-  summarize(Avg=mean(lifeExp))
+  summarize(Avg=mean(lifeExp))%>%
+  knitr::kable()
 ```
 
-    ## # A tibble: 12 x 2
-    ##     year   Avg
-    ##    <int> <dbl>
-    ##  1  1952  69.3
-    ##  2  1957  70.3
-    ##  3  1962  71.1
-    ##  4  1967  71.3
-    ##  5  1972  71.9
-    ##  6  1977  72.9
-    ##  7  1982  74.3
-    ##  8  1987  75.3
-    ##  9  1992  76.9
-    ## 10  1997  78.2
-    ## 11  2002  79.7
-    ## 12  2007  80.7
+| year |     Avg |
+| ---: | ------: |
+| 1952 | 69.2550 |
+| 1957 | 70.2950 |
+| 1962 | 71.0850 |
+| 1967 | 71.3100 |
+| 1972 | 71.9100 |
+| 1977 | 72.8550 |
+| 1982 | 74.2900 |
+| 1987 | 75.3200 |
+| 1992 | 76.9450 |
+| 1997 | 78.1900 |
+| 2002 | 79.7400 |
+| 2007 | 80.7195 |
 
   - As table is not obvious enough to show the data, I’ll then draw a
     plot to reflect this.
